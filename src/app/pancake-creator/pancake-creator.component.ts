@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {FormGroup, FormControl} from '@angular/forms';
 
 @Component({
   selector: 'app-pancake-creator',
@@ -19,11 +19,6 @@ export class PancakeCreatorComponent implements OnInit {
     sweetOrSavory: 'all'
   };
 
-  constructor(private _formBuilder: FormBuilder) {}
-
-  ngOnInit() {
-    this.firstFormGroup = this._formBuilder.group({
-      foodPreferences: ['', Validators.required]
-    });
+  ngOnInit(): void {
   }
 }

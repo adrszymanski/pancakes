@@ -1,23 +1,26 @@
 <div class="container">
   <mat-horizontal-stepper [linear]="true" #stepper>
-    <mat-step [stepControl]="firstFormGroup">
-      <form #pancakeForm="ngForm" [formGroup]="firstFormGroup" (ngSubmit)="onSubmit()">
+    <mat-step>
+      <form #pancakeForm="ngForm" (ngSubmit)="onSubmit()">
         <ng-template matStepLabel>Typ naleśników</ng-template>
         <h2>Chcę zjeść naleśniki...</h2>
         <div class="form-inline">
           <div class="form-check">
             <label class="checkbox-inline">
-              <input type="radio" name="foodPreferences" value="all" [(ngModel)]="searchParams.foodPreferences"> <span class="label-text"><img alt="all" src="assets/images/thumb.png" style="padding: 5px">Obojętne</span>
+              <input type="radio" name="foodPreference" value="all" [(ngModel)]="searchParams.foodPreferences">
+              <span class="label-text"><img alt="all" src="assets/images/thumb.png" style="padding: 5px">Wszelakie</span>
             </label>
           </div>
           <div class="form-check">
             <label class="checkbox-inline">
-              <input type="radio" name="foodPreferences" value="vegetarian"  [(ngModel)]="searchParams.foodPreferences"> <span class="label-text"><img alt="all" src="assets/images/vegetarian.png" style="padding: 5px">Wegetariańskie</span>
+              <input type="radio" name="foodPreference" value="vegetarian"  [(ngModel)]="searchParams.foodPreferences">
+              <span class="label-text"><img alt="all" src="assets/images/vegetarian.png" style="padding: 5px">Wegetariańskie</span>
             </label>
           </div>
           <div class="form-check">
             <label class="checkbox-inline">
-              <input type="radio" name="foodPreferences" value="vegan"  [(ngModel)]="searchParams.foodPreferences"> <span class="label-text"><img alt="all" src="assets/images/vegan.png" style="padding: 5px">Wegańskie</span>
+              <input type="radio" name="foodPreference" value="vegan"  [(ngModel)]="searchParams.foodPreferences">
+              <span class="label-text"><img alt="all" src="assets/images/vegan.png" style="padding: 5px">Wegańskie</span>
             </label>
           </div>
         </div>
@@ -25,12 +28,16 @@
         <div class="form-inline">
           <div class="form-check">
             <label class="checkbox-inline">
-              <input type="checkbox" name="check" [(ngModel)]="searchParams.glutenFree"> <span class="label-text"><img alt="all" src="assets/images/glutenfree.jpg" style="padding: 5px">Bez glutenu</span>
+              <input type="checkbox" name="glutenFree" [(ngModel)]="searchParams.glutenFree">
+              <span class="label-text"><img alt="all" src="assets/images/glutenfree.jpg" style="padding: 5px">Bez glutenu</span>
             </label>
           </div>
           <div class="form-check">
             <label class="checkbox-inline">
-              <input type="checkbox" name="check" [(ngModel)]="searchParams.lactoseFree"> <span class="label-text"><img alt="all" src="assets/images/nolactose.png" style="padding: 5px">Bez laktozy</span>
+              <input type="checkbox" name="foodPreferences"
+                     [disabled]="searchParams.foodPreferences == 'vegan'"
+                     [(ngModel)]="searchParams.lactoseFree">
+              <span class="label-text"><img alt="all" src="assets/images/nolactose.png" style="padding: 5px">Bez laktozy</span>
             </label>
           </div>
         </div>

@@ -26,6 +26,10 @@ body {
   background-color: #ff7e25;
 }
 
+.active-link {
+  font-weight: bold;
+}
+
 label{
   position: relative;
   cursor: pointer;
