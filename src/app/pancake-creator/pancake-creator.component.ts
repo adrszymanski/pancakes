@@ -9,6 +9,16 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 export class PancakeCreatorComponent implements OnInit {
   firstFormGroup: FormGroup;
 
+  searchParams = {
+    foodPreferences: '',
+    glutenFree: false,
+    lactoseFree: false,
+    typeOfFlour: [],
+    noEggs: false,
+    noMilk: false,
+    sweetOrSavory: 'all'
+  };
+
   constructor(private _formBuilder: FormBuilder) {}
 
   ngOnInit() {
