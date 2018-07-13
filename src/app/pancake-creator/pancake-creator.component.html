@@ -1,0 +1,52 @@
+<div class="container">
+  <mat-horizontal-stepper [linear]="true" #stepper>
+    <mat-step [stepControl]="firstFormGroup">
+      <form [formGroup]="firstFormGroup">
+        <ng-template matStepLabel>Typ naleśników</ng-template>
+        <h2>Chcę zjeść naleśniki...</h2>
+        <div class="form-inline">
+          <div class="form-check">
+            <label class="checkbox-inline">
+              <input type="radio" name="foodPreferences" value="all" formControlName="foodPreferences"> <span class="label-text"><img alt="all" src="assets/images/thumb.png" style="padding: 5px">Obojętne</span>
+            </label>
+          </div>
+          <div class="form-check">
+            <label class="checkbox-inline">
+              <input type="radio" name="foodPreferences" value="vegetarian" formControlName="foodPreferences"> <span class="label-text"><img alt="all" src="assets/images/vegetarian.png" style="padding: 5px">Wegetariańskie</span>
+            </label>
+          </div>
+          <div class="form-check">
+            <label class="checkbox-inline">
+              <input type="radio" name="foodPreferences" value="vegan" formControlName="foodPreferences"> <span class="label-text"><img alt="all" src="assets/images/vegan.png" style="padding: 5px">Wegańskie</span>
+            </label>
+          </div>
+        </div>
+        <h2>Dodatkowo:</h2>
+        <div class="form-inline">
+          <div class="form-check">
+            <label class="checkbox-inline">
+              <input type="checkbox" name="check"> <span class="label-text"><img alt="all" src="assets/images/glutenfree.jpg" style="padding: 5px">Bez glutenu</span>
+            </label>
+          </div>
+          <div class="form-check">
+            <label class="checkbox-inline">
+              <input type="checkbox" name="check"> <span class="label-text"><img alt="all" src="assets/images/nolactose.png" style="padding: 5px">Bez laktozy</span>
+            </label>
+          </div>
+        </div>
+        <hr>
+        <div>
+          <button mat-button matStepperNext>DALEJ</button>
+        </div>
+      </form>
+    </mat-step>
+    <mat-step>
+      <ng-template matStepLabel>Gotowe!</ng-template>
+        You are now done.
+      <div>
+        <button mat-button matStepperPrevious>WROC</button>
+        <button mat-button (click)="stepper.reset()">RESET</button>
+      </div>
+    </mat-step>
+  </mat-horizontal-stepper>
+</div>
