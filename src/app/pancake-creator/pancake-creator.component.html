@@ -3,56 +3,98 @@
     <mat-step>
       <form #pancakeForm="ngForm" (ngSubmit)="onSubmit()">
         <ng-template matStepLabel>Typ naleśników</ng-template>
-        <h2>Chcę zjeść naleśniki...</h2>
-        <div class="form-inline">
+        <h3>Chcę zjeść naleśniki...</h3>
           <div class="form-check">
             <label class="checkbox-inline">
-              <input type="radio" name="foodPreference" value="all" [(ngModel)]="searchParams.foodPreferences">
+              <input type="radio" name="foodPreference" value="all" [(ngModel)]="pancake.foodPreferences">
               <span class="label-text"><img alt="all" src="assets/images/thumb.png" style="padding: 5px">Wszelakie</span>
             </label>
           </div>
           <div class="form-check">
             <label class="checkbox-inline">
-              <input type="radio" name="foodPreference" value="vegetarian"  [(ngModel)]="searchParams.foodPreferences">
+              <input type="radio" name="foodPreference" value="vegetarian"  [(ngModel)]="pancake.foodPreferences">
               <span class="label-text"><img alt="all" src="assets/images/vegetarian.png" style="padding: 5px">Wegetariańskie</span>
             </label>
           </div>
           <div class="form-check">
             <label class="checkbox-inline">
-              <input type="radio" name="foodPreference" value="vegan"  [(ngModel)]="searchParams.foodPreferences">
+              <input type="radio" name="foodPreference" value="vegan"  [(ngModel)]="pancake.foodPreferences">
               <span class="label-text"><img alt="all" src="assets/images/vegan.png" style="padding: 5px">Wegańskie</span>
             </label>
           </div>
+        <h3>Na słodko czy na słono?</h3>
+        <div class="form-check">
+          <label class="checkbox-inline">
+            <input type="radio" name="isSweet" value="0"  [(ngModel)]="pancake.isSweet">
+            <span class="label-text"><img alt="all" src="assets/images/rice.png" width="34px" height="34px" style="padding: 5px">Słone</span>
+          </label>
         </div>
-        <h2>Dodatkowo:</h2>
-        <div class="form-inline">
-          <div class="form-check">
-            <label class="checkbox-inline">
-              <input type="checkbox" name="glutenFree" [(ngModel)]="searchParams.glutenFree">
-              <span class="label-text"><img alt="all" src="assets/images/glutenfree.jpg" style="padding: 5px">Bez glutenu</span>
-            </label>
-          </div>
-          <div class="form-check">
-            <label class="checkbox-inline">
-              <input type="checkbox" name="foodPreferences"
-                     [disabled]="searchParams.foodPreferences == 'vegan'"
-                     [(ngModel)]="searchParams.lactoseFree">
-              <span class="label-text"><img alt="all" src="assets/images/nolactose.png" style="padding: 5px">Bez laktozy</span>
-            </label>
-          </div>
+        <div class="form-check">
+          <label class="checkbox-inline">
+            <input type="radio" name="isSweet" value="1"  [(ngModel)]="pancake.isSweet">
+            <span class="label-text"><img alt="all" src="assets/images/honey.png" width="34px" height="34px" style="padding: 5px">Słodkie</span>
+          </label>
         </div>
         <hr>
         <div>
-          <button mat-button matStepperNext>DALEJ</button>
+          <button mat-button matStepperNext (click)="pushParams()">DALEJ</button>
         </div>
       </form>
+    </mat-step>
+    <mat-step>
+      <ng-template matStepLabel>Główny składnik</ng-template>
+      <h3>Dodatkowo:</h3>
+      <div class="form-inline">
+        <div class="form-check">
+          <label class="checkbox-inline">
+            <input type="checkbox" name="glutenFree" [(ngModel)]="pancake.isGlutenFree">
+            <span class="label-text"><img alt="all" src="assets/images/glutenfree.jpg" style="padding: 5px">Bez glutenu</span>
+          </label>
+        </div>
+        <div class="form-check">
+          <label class="checkbox-inline">
+            <input type="checkbox" name="foodPreferences"
+                   [disabled]="pancake.foodPreferences == 'vegan'"
+                   [(ngModel)]="pancake.isLactoseFree">
+            <span class="label-text"><img alt="all" src="assets/images/nolactose.png" style="padding: 5px">Bez laktozy</span>
+          </label>
+        </div>
+        <div class="form-check">
+          <label class="checkbox-inline">
+            <input type="checkbox" name="noEggs"
+                   [disabled]="pancake.foodPreferences == 'vegan'"
+                   [(ngModel)]="pancake.noEggs">
+            <span class="label-text"><img alt="all" src="assets/images/noeggs.jpg" style="padding: 5px">Bez jajek</span>
+          </label>
+        </div>
+      </div>
+      <h3>Wybierz mąkę...</h3>
+      <div *ngFor="let type of typesOfFlour" class="ck-button">
+        <label>
+          <input type="radio" name="typeOfFlour" [(ngModel)]="pancake.typeOfFlour" value="{{ type.value }}"><span>{{ type.label }}</span>
+        </label>
+      </div>
+      <div class="clearfix"></div>
+      <h3>...albo coś innego</h3>
+      <div class="ck-button">
+        <label>
+          <input type="checkbox" name="typeOfFlour" [(ngModel)]="pancake.typeOfFlour" value="12"><span>Banan</span>
+        </label>
+      </div>
+      <div class="clearfix"></div>
+      <div class="clearfix"></div>
+      <hr>
+      <div>
+        <button mat-button matStepperNext (click)="pushParams()">DALEJ</button>
+        <button mat-button matStepperPrevious (click)="pushParams()" class="button-back">WRÓĆ</button>
+      </div>
     </mat-step>
     <mat-step>
       <ng-template matStepLabel>Gotowe!</ng-template>
         You are now done.
       <div>
-        <button mat-button matStepperPrevious>WROC</button>
-        <button mat-button (click)="stepper.reset(); pancakeForm.reset()">RESET</button>
+        <button mat-button (click)="stepper.reset(); formReset();">RESET</button>
+        <button mat-button matStepperPrevious (click)="pushParams()" class="button-back">WRÓĆ</button>
       </div>
     </mat-step>
   </mat-horizontal-stepper>
